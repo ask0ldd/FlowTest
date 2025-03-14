@@ -1,7 +1,6 @@
 #root {
-  max-width: 1280px;
+  max-width: 100Vw;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
@@ -44,7 +43,7 @@
 
 .react-flow {
   /* Custom Variables */
-  --xy-theme-selected: #F57DBD;
+  --xy-theme-selected: rgb(96 165 250);
   --xy-theme-hover: #C5C5C5;
   --xy-theme-edge-hover: black;
   --xy-theme-color-focus: #E8E8E8;
@@ -59,8 +58,8 @@
 
   --xy-node-border-radius-default: 8px;
 
-  --xy-handle-background-color-default: #ffffff;
-  --xy-handle-border-color-default: #AAAAAA;
+  --xy-handle-background-color-default: #373737;
+  --xy-handle-border-color-default: #373737;
 
   --xy-edge-label-color-default: #505050;
 }

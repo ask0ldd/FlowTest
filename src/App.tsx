@@ -1,17 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { addEdge, Background, BackgroundVariant, Connection, Edge, Node, OnNodesChange, ReactFlow, useEdgesState, useNodesState } from '@xyflow/react';
+import { addEdge, Background, BackgroundVariant, Connection, Controls, Edge, Node, OnNodesChange, ReactFlow, useEdgesState, useNodesState, useReactFlow } from '@xyflow/react';
  
 import '@xyflow/react/dist/style.css';
 import './App.css'
 import { useCallback, useState } from 'react';
-import ColorNode from './customNodes/colorNode';
 import LLMNode from './customNodes/LLMNode';
+import ColorNode from './customNodes/ColorNode';
+import ScrapeNode from './customNodes/ScrapeNode';
+import WebSearchNode from './customNodes/WebSearchNode';
 
 const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
 
 const nodeTypes = {
-  colorNode: ColorNode,
-  LLMNode : LLMNode,
+  colorNode : ColorNode,
+  LLMNode,
+  ScrapeNode,
+  WebSearchNode,
 };
  
 const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
@@ -28,30 +32,39 @@ export default function App() {
   const initialNodes = [
     { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
     { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
-    { id: '4', type :'colorNode', position: { x: 0, y: 400 }, data: { label: '4', onChange : onChangeColor } },
-    { id: '5', type :'LLMNode', position: { x: 0, y: 500 }, data: { label: '5', onChange : () => void 0 } },
+    { id: '3', type :'colorNode', position: { x: 0, y: 400 }, data: { label: '4', onChange : onChangeColor } },
+    { id: '4', type :'LLMNode', position: { x: 0, y: 500 }, data: { label: '5', onChange : () => void 0 } },
       
   ];
 
   const [nodes, setNodes, onNodesChange] = useNodesState<Node>(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>(initialEdges);
 
+  // const reactFlow = useReactFlow()
+
   function handleAddNode(event: React.MouseEvent<HTMLSpanElement, MouseEvent>): void {
     event.preventDefault()
-    setNodes(prevNodes => [...prevNodes, {id:'3', position : {x:0, y:200}, data : {label : '3'}}])
+    // reactFlow.addNodes({id:'5', position : {x:0, y:200}, data : {label : '3'}})
+    setNodes(prevNodes => 
+      [...prevNodes, {id:'3', position : {x:0, y:200}, data : {label : '3'}}]
+    )
   }
   
   const onConnect = useCallback(
-    (params : Connection) =>
+    (connection : Connection) =>
       setEdges(eds =>
-        addEdge<Edge>({ ...params }, eds),
+        addEdge<Edge>(connection, eds),
       ),
-    [],
+    [setEdges],
   );
+
+  function handleListNodes(event: React.MouseEvent<HTMLSpanElement>): void {
+    nodes.forEach(node => console.log(JSON.stringify(node)))
+  }
 
   return (
     <div style={{display:'flex', width: '100vw', height: '100vh'}}>
-      <div style={{ width: '80%', height: '100%' }}>
+      <div className='flex shrink grow-0 w-[80%]'>
         <ReactFlow 
           nodes={nodes} 
           edges={edges}
@@ -66,10 +79,12 @@ export default function App() {
           style={{background:bg}}
         >
           <Background color="#333" variant={BackgroundVariant.Dots} />
+          <Controls/>
         </ReactFlow>
       </div>
-      <div style={{display:'flex', flexDirection:'column', width:'20%', height:'100%', background:'#EFEFEF'}}>
+      <div className='flex shrink-0 grow-0 flex-col w-[20%] h-full bg-[#EFEFEF]'>
         <span onClick={handleAddNode}>add node</span>
+        <span onClick={handleListNodes}>list nodes</span>
       </div>
     </div>
   );
