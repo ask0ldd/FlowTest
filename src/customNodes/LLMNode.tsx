@@ -1,0 +1,26 @@
+import { Handle, NodeProps, Position, Node } from "@xyflow/react";
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function LLMNode({data, isConnectable}: NodeProps<Node<{onChange : () => void}>>){
+    return(
+        <>
+            <Handle
+                type="target"
+                position={Position.Left}
+                onConnect={(params) => console.log('handle onConnect', params)}
+                isConnectable={isConnectable}
+            />
+            <div className="flex flex-col gap-y-[1rem]">
+                <span>Model</span>
+                <input className="flex border-1 border-neutral-400 p-2 rounded-sm" type="text" placeholder="llama 3.2:3b"/>
+                <textarea className="flex border-1 border-neutral-400 p-2 rounded-sm" placeholder="prompt" rows={8} cols={50} style={{resize:'none'}}/>
+            </div>
+            <Handle
+                type="source"
+                position={Position.Right}
+                id="a"
+                isConnectable={isConnectable}
+            />
+        </>
+    )
+}
