@@ -11,9 +11,9 @@ export default function LLMNode({data, isConnectable}: NodeProps<Node<{onChange 
                 isConnectable={isConnectable}
             />
             <div className="flex flex-col gap-y-[1rem]">
-                <span>Model</span>
-                <input className="flex border-1 border-neutral-400 p-2 rounded-sm" type="text" placeholder="llama 3.2:3b"/>
-                <textarea className="flex border-1 border-neutral-400 p-2 rounded-sm" placeholder="prompt" rows={8} cols={50} style={{resize:'none'}}/>
+                <span>Ollama Model</span>
+                <input className="flex border-1 border-neutral-400 p-2 rounded-sm focus:outline-blue-400" type="text" placeholder="llama 3.2:3b"/>
+                <textarea className="flex border-1 border-neutral-400 p-2 rounded-sm focus:outline-blue-400" placeholder="prompt" rows={8} cols={50} style={{resize:'none'}}/>
             </div>
             <Handle
                 type="source"
