@@ -44,13 +44,13 @@ const initEdges : Edge[] = [
         target : 'n3',
     },
     {
-        id : 'e2-4',
-        source : 'n2',
+        id : 'e3-4',
+        source : 'n3',
         target : 'n4',
     },
     {
-        id : 'e3-4',
-        source : 'n3',
+        id : 'e2-4',
+        source : 'n2',
         target : 'n4',
     },
 ]

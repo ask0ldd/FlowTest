@@ -4,13 +4,18 @@ import { isTextNode, ResultNodeType, TextNodeType, UpperCaseNodeType } from "../
 
 export default function UpperCaseNode({ id }: NodeProps){
     const { updateNodeData } = useReactFlow();
+
+    // This hook returns an array of connections on a specific node, handle type ('source', 'target') or handle ID.
     const connections = useNodeConnections({
         handleType: 'target',
     });
+
+    // This hook lets you subscribe to changes of a specific nodes data object.
     const nodesData = useNodesData<TextNodeType | ResultNodeType | UpperCaseNodeType>(connections[0]?.source);
     const textNode = isTextNode(nodesData) ? nodesData : null;
     
     useEffect(() => {
+            // Updates the data attribute of a node.
             updateNodeData(id, { text: textNode?.data.text.toUpperCase() });
     }, [textNode]);
 
