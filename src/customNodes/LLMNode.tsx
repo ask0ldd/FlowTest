@@ -1,7 +1,7 @@
 import { Handle, NodeProps, Position, Node } from "@xyflow/react";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function LLMNode({data, isConnectable}: NodeProps<Node<{onChange : () => void}>>){
+export default function LLMNode({id, data, isConnectable}: NodeProps<Node<{onChange : () => void}>>){
     return(
         <>
             <Handle
