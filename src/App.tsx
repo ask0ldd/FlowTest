@@ -30,7 +30,7 @@ export default function App() {
   }
 
   const initialNodes = [
-    { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
+    { id: '1', type : 'input', position: { x: 0, y: 0 }, data: { label: 'Input' } },
     { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
     { id: '3', type :'colorNode', position: { x: 0, y: 400 }, data: { label: '4', onChange : onChangeColor } },
     { id: '4', type :'LLMNode', position: { x: 0, y: 500 }, data: { label: '5', onChange : () => void 0 } },
