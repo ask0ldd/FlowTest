@@ -1,6 +1,6 @@
 import { useNodeConnections, useNodesData, Handle, Position } from "@xyflow/react";
 import { memo } from "react";
-import { ResultNodeType, TextNodeType, UpperCaseNodeType, isTextNode } from "../utils/nodeUtils";
+import { ResultNodeType, TextNodeType, UpperCaseNodeType, isTextNode } from "../../utils/nodeUtils";
 
 function ResultNode() {
     // This hook returns an array of connections on a specific node, handle type ('source', 'target') or handle ID.

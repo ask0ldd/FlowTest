@@ -1,6 +1,6 @@
 import { Handle, NodeProps, Position, useNodeConnections, useNodesData, useReactFlow } from "@xyflow/react";
 import { useEffect } from "react";
-import { isTextNode, ResultNodeType, TextNodeType, UpperCaseNodeType } from "../utils/nodeUtils";
+import { isTextNode, ResultNodeType, TextNodeType, UpperCaseNodeType } from "../../utils/nodeUtils";
 
 export default function UpperCaseNode({ id }: NodeProps){
     const { updateNodeData } = useReactFlow();
@@ -10,12 +10,15 @@ export default function UpperCaseNode({ id }: NodeProps){
         handleType: 'target',
     });
 
-    // This hook lets you subscribe to changes of a specific nodes data object.
-    const nodesData = useNodesData<TextNodeType | ResultNodeType | UpperCaseNodeType>(connections[0]?.source);
+    // This hook lets you subscribe to changes of a specific nodes data object
+    // here : the source node
+    const n1TextNode = connections[0]?.source
+    const nodesData = useNodesData<TextNodeType | ResultNodeType | UpperCaseNodeType>(n1TextNode);
     const textNode = isTextNode(nodesData) ? nodesData : null;
     
     useEffect(() => {
-            // Updates the data attribute of a node.
+            // Updates the data attribute of a node
+            // here the current node : id
             updateNodeData(id, { text: textNode?.data.text.toUpperCase() });
     }, [textNode]);
 
