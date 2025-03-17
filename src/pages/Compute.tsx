@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Background, BackgroundVariant, Controls, Node, Edge, ReactFlow, useEdgesState, useNodesState, addEdge, Connection } from "@xyflow/react";
 import { useCallback } from "react";
-import TextNode from "../customNodes/TextNode";
-import UpperCaseNode from "../customNodes/UpperCaseNode";
-import ResultNode from "../customNodes/ResultNode";
+import TextNode from "../customNodes/compute/TextNode";
+import UpperCaseNode from "../customNodes/compute/UpperCaseNode";
+import ResultNode from "../customNodes/compute/ResultNode";
 import { MyNodeType } from "../utils/nodeUtils";
 
 const initNodes: MyNodeType[] = [
@@ -74,6 +74,14 @@ export default function Compute(){
         result : ResultNode,
     }
 
+    function handleLogNodes(){
+      console.log(JSON.stringify(nodes))
+    }
+
+    function handleLogEdges(){
+      console.log(JSON.stringify(edges))
+    }
+
 
     return (
         <div style={{display:'flex', width: '100vw', height: '100vh'}}>
@@ -96,6 +104,8 @@ export default function Compute(){
             </ReactFlow>
             </div>
             <div className='flex shrink-0 grow-0 flex-col w-[20%] h-full bg-[#EFEFEF]'>
+              <span onClick={handleLogNodes}>log nodes</span>
+              <span onClick={handleLogEdges}>log edges</span>
             </div>
         </div>
     );
