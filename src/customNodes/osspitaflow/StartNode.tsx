@@ -2,11 +2,14 @@
 import { Handle, Position } from "@xyflow/react";
 
 export default function StartNode(){
+
+    function handleStart(){
+
+    }
+
     return(
         <>
-            <span className="w-[128px]">
-                Start
-            </span>
+            <button className="w-[120px]" onClick={handleStart}>Start</button>
             <Handle
                 type="source"
                 position={Position.Right}
