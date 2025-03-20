@@ -35,7 +35,7 @@ const initNodes: MyNodeType[] = [
       data: { text : ''},
       position: { x: 300, y: -75 },
     },
-];
+]
 
 const initEdges : Edge[] = [
     {
@@ -57,8 +57,8 @@ const initEdges : Edge[] = [
 
 export default function Compute(){
 
-    const [nodes, setNodes, onNodesChange] = useNodesState<Node>(initNodes);
-    const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>(initEdges);
+    const [nodes, setNodes, onNodesChange] = useNodesState<Node>(initNodes)
+    const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>(initEdges)
 
     const onConnect = useCallback(
     (connection : Connection) =>
@@ -81,7 +81,6 @@ export default function Compute(){
     function handleLogEdges(){
       console.log(JSON.stringify(edges))
     }
-
 
     return (
         <div style={{display:'flex', width: '100vw', height: '100vh'}}>
@@ -108,6 +107,6 @@ export default function Compute(){
               <span onClick={handleLogEdges}>log edges</span>
             </div>
         </div>
-    );
+    )
     
 }

@@ -4,28 +4,57 @@ import StartNode from "../customNodes/osspitaflow/StartNode";
 import OllamaNode from "../customNodes/osspitaflow/OllamaNode";
 import FileOutputNode from "../customNodes/osspitaflow/FileOutputNode";
 import PromptNode from "../customNodes/osspitaflow/PromptNode";
+import ModelNode from "../customNodes/osspitaflow/ModelNode";
+import { useEffect, useMemo } from "react";
 
 const nodeTypes = {
     startNode : StartNode,
     ollamaNode : OllamaNode,
     fileOutputNode : FileOutputNode,
     promptNode : PromptNode,
+    modelNode : ModelNode,
 }
 
-const initNodes : Node[] = [
-    { id: '1', type : 'startNode', position: { x: 0, y: 0 }, data: { } },
-    { id: '2', type : 'promptNode',  position: { x: 0, y: 100 }, data: { } },
-    { id: '3', type : 'ollamaNode', position: { x: 400, y: 0 }, data: { label: 'Ollama' } },
-    { id: '4', type : 'fileOutputNode', position: { x: 600, y: 0 }, data: { label: 'Output' } },
-]
-
-const initEdges : Edge[] = [
-    { id : '1-2', source : '1', target : '3'}
-]
-
 export default function Spita(){
+
+    function start(){
+        console.log('start')
+    }
+
+    const initNodes = useMemo(() => [
+        { id: '1', type: 'startNode', position: { x: 0, y: 0 }, data: { start } },
+        { id: '2', type: 'promptNode', position: { x: 0, y: 100 }, data: {} },
+        { id: '3', type: 'ollamaNode', position: { x: 400, y: 0 }, data: { label: 'Ollama' } },
+        { id: '4', type: 'fileOutputNode', position: { x: 600, y: 0 }, data: { label: 'Output' } },
+        { id: '5', type: 'modelNode', position: { x: 400, y: 200 }, data: { label: 'Model' } },
+    ], []);
+    
+      const initEdges = useMemo(() => [
+        { id: '1-2', source: '1', target: '3' },
+        { id: '5-3', source: '5', target: '3', targetHandle: 'model' }
+    ], []);
+
+
+    
     const [nodes, setNodes, onNodesChange] = useNodesState<Node>(initNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>(initEdges);
+
+    /*useEffect(() => {
+        const nds = nodes.map(nd =>  {
+            if(nd.type == "startNode") {
+                return {...nd, ['data'] : {...['data'], start : start} }
+            } else {
+                return nd
+            }
+        })
+        setNodes(nds)
+    }, [nodes])*/
+
+    useEffect(() => {
+        edges.forEach(dg => {
+            if(dg.targetHandle == "model") console.log(JSON.stringify(dg))
+        })
+    }, [edges])
 
     return(
         <div style={{display:'flex', width: '100vw', height: '100vh'}}>
