@@ -3,6 +3,7 @@ import { Handle, Position } from "@xyflow/react";
 import { OllamaService } from "../../services/OllamaService";
 import { useEffect, useState } from "react";
 import { IModelInfos } from "../../interfaces/responses/OllamaResponseTypes";
+import * as Select from '@radix-ui/react-select'
 
 export default function ModelNode(){
 
@@ -11,6 +12,10 @@ export default function ModelNode(){
     async function getModels(){
         const models = (await OllamaService.getModelList())?.models
         return setModels(models ?? [])
+    }
+
+    function handleChange(){
+
     }
 
     useEffect(() => {
@@ -27,9 +32,14 @@ export default function ModelNode(){
             />
             <div className="p-[1rem]" style={{display:'flex', flexDirection:'column', rowGap:'1rem'}}>
                 <span>Model</span>
-                {
-                    models && models.map(mdl => (<span>{mdl.name}</span>))
-                }
+                <Select.Root onValueChange={handleChange}>
+                    <Select.Trigger>
+                        <Select.Value placeholder="Select options" />
+                    </Select.Trigger>
+                    <Select.Content>
+                        {models && models.map(mdl => (<Select.Item value={mdl.name}>{mdl.name}</Select.Item>))}
+                    </Select.Content>
+                </Select.Root>
             </div>
         </>
     )
