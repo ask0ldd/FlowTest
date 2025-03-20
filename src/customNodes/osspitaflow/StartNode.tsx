@@ -1,15 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Handle, Position } from "@xyflow/react";
+import { Handle, NodeProps, Position, Node } from "@xyflow/react";
 
-export default function StartNode(){
-
-    function handleStart(){
-
-    }
+export default function StartNode({data} : NodeProps<Node<{start : () => void}>>){
 
     return(
         <>
-            <button className="w-[120px]" onClick={handleStart}>Start</button>
+            <button className="w-[120px]" onClick={data.start}>Start</button>
             <Handle
                 type="source"
                 position={Position.Right}

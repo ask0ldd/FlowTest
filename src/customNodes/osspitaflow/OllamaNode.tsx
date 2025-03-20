@@ -30,10 +30,12 @@ export default function OllamaNode({data} : NodeProps<Node<{prompt : string, con
                 <label className="label">Prompt</label>
             </div>
             <span className="w-full text-center">Ollama</span>
+            <div>100%</div>
             <div className="text-left">
                 <Handle
                     className="handle"
                     type="target"
+                    id="model"
                     position={Position.Left}
                     onConnect={(params) => void 0}
                     isConnectable={true}
