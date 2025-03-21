@@ -13,6 +13,7 @@ export default function OllamaNode({data} : NodeProps<Node<{prompt : string, con
                 <Handle
                     className="handle"
                     type="target"
+                    id="ctx"
                     position={Position.Left}
                     onConnect={(params) => void 0}
                     isConnectable={true}
@@ -23,6 +24,7 @@ export default function OllamaNode({data} : NodeProps<Node<{prompt : string, con
                 <Handle
                     className="handle"
                     type="target"
+                    id="prompt"
                     position={Position.Left}
                     onConnect={(params) => void 0}
                     isConnectable={true}
@@ -46,6 +48,7 @@ export default function OllamaNode({data} : NodeProps<Node<{prompt : string, con
                 <Handle
                     className="handle"
                     type="target"
+                    id="options"
                     position={Position.Left}
                     onConnect={(params) => void 0}
                     isConnectable={true}
