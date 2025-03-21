@@ -12,9 +12,9 @@ export default function PromptNode(){
     }
 
     return(
-        <div className="node p-[10px]">
+        <div className="node p-[10px] w-[340px]">
             <label>Prompt</label>
-            <textarea onFocus={handleTextareaFirstFocus} defaultValue={defaultPromptValue} className="resize-none border-1 border-neutral-200 p-[5px] rounded-sm bg-neutral-50 text-[10px] w-[300px] focus:outline-none focus:border-blue-400"/>
+            <textarea onFocus={handleTextareaFirstFocus} defaultValue={defaultPromptValue} className="resize-none border-1 border-neutral-200 p-[5px] rounded-sm bg-neutral-50 text-[10px] w-full focus:outline-none focus:border-blue-400"/>
             <Handle
                 type="source"
                 position={Position.Right}
