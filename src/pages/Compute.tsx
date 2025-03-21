@@ -61,11 +61,11 @@ export default function Compute(){
     const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>(initEdges)
 
     const onConnect = useCallback(
-    (connection : Connection) =>
-        setEdges(eds =>
-        addEdge<Edge>(connection, eds),
-        ),
-    [setEdges],
+      (connection : Connection) =>
+          setEdges(eds =>
+          addEdge<Edge>(connection, eds),
+          ),
+      [setEdges],
     );
 
     const nodeTypes = {

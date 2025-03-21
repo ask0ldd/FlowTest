@@ -26,15 +26,14 @@ export default function Spita(){
         { id: '2', type: 'promptNode', position: { x: 0, y: 100 }, data: {} },
         { id: '3', type: 'ollamaNode', position: { x: 400, y: 0 }, data: { label: 'Ollama' } },
         { id: '4', type: 'fileOutputNode', position: { x: 600, y: 0 }, data: { label: 'Output' } },
-        { id: '5', type: 'modelNode', position: { x: 400, y: 200 }, data: { label: 'Model' } },
+        { id: '5', type: 'modelNode', position: { x: 0, y: 300 }, data: { label: 'Model' } },
     ], []);
     
       const initEdges = useMemo(() => [
         { id: '1-2', source: '1', target: '3' },
-        { id: '5-3', source: '5', target: '3', targetHandle: 'model' }
+        { id: '5-3', source: '5', target: '3', targetHandle: 'model' },
+        { id: '2-3', source: '2', target: '3', targetHandle: 'prompt' },
     ], []);
-
-
     
     const [nodes, setNodes, onNodesChange] = useNodesState<Node>(initNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>(initEdges);
@@ -62,6 +61,8 @@ export default function Spita(){
             <ReactFlow 
                 nodes={nodes} 
                 edges={edges}
+                onNodesChange={onNodesChange}
+                onEdgesChange={onEdgesChange}
                 snapToGrid={true}
                 nodeTypes={nodeTypes}
                 defaultViewport={{ x: 0, y: 0, zoom: 1.5 }}
