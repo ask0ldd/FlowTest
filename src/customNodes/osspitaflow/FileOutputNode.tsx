@@ -9,6 +9,7 @@ export default function FileOutputNode({id, data, isConnectable}: NodeProps<Node
         <>
             <Handle
                 type="target"
+                id="input"
                 position={Position.Left}
                 onConnect={(params) => console.log('handle onConnect', params)}
                 isConnectable={isConnectable}
