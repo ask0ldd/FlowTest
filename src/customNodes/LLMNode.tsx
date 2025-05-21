@@ -3,7 +3,7 @@ import { Handle, NodeProps, Position, Node } from "@xyflow/react";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function LLMNode({id, data, isConnectable}: NodeProps<Node<{onChange : () => void}>>){
     return(
-        <>
+        <div style={{padding : '1rem'}}>
             <Handle
                 type="target"
                 position={Position.Left}
@@ -21,6 +21,6 @@ export default function LLMNode({id, data, isConnectable}: NodeProps<Node<{onCha
                 id="a"
                 isConnectable={isConnectable}
             />
-        </>
+        </div>
     )
 }
