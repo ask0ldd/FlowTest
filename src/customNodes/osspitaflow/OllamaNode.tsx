@@ -13,12 +13,23 @@ export default function OllamaNode({data} : NodeProps<Node<{prompt : string, con
                 <Handle
                     className="handle"
                     type="target"
-                    id="ctx"
+                    id="system"
                     position={Position.Left}
                     onConnect={(params) => void 0}
                     isConnectable={true}
                 />
-                <label className="label">Ctx</label>
+                <label className="label">Sys Prompt</label>
+            </div>
+            <div className="text-left">
+                <Handle
+                    className="handle"
+                    type="target"
+                    id="start"
+                    position={Position.Left}
+                    onConnect={(params) => void 0}
+                    isConnectable={true}
+                />
+                <label className="label">Start</label>
             </div>
             <div className="text-left">
                 <Handle
