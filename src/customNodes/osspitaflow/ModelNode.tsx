@@ -9,13 +9,19 @@ import './ModelNode.css'
 export default function ModelNode(){
 
     const [models, setModels] = useState<IModelInfos[]>([])
-    const [value, setValue] = useState('')
+    // const [activeModel, setActiveModel] = useState<string|null>(null)
     const [index, setIndex] = useState(0)
 
     async function getModels(){
-        const models = (await OllamaService.getModelList())?.models
-        setModels(models ?? [])
-        if(models) setValue(models[0].model)
+        try{
+            const models = (await OllamaService.getModelList())?.models
+            setModels(models ?? [])
+            /*if(models) setActiveModel(models[0].model)*/
+        }catch(e){
+            console.error(e)
+            setModels([])
+            // setActiveModel(null)
+        }
     }
 
     useEffect(() => {
@@ -31,19 +37,19 @@ export default function ModelNode(){
     }
 
     return(
-        <div className="node w-[340px]">
+        <div className="node p-[10px] w-[340px] h-fit gap-y-[0.75rem]">
             <Handle
                 type="source"
                 position={Position.Right}
                 onConnect={(params) => console.log('handle onConnect', params)}
                 isConnectable={true}
             />
-            <div className="p-[1rem]" style={{display:'flex', flexDirection:'column', rowGap:'1rem'}}>
+            <div style={{display:'flex', flexDirection:'column', rowGap:'1rem'}}>
                 <span>Model</span>
-                <div className="flex">
-                    <button className="flex justify-center h-[40px] w-[40px] items-center" onClick={handlePrevModel}>p</button>
-                        <span className="flex justify-center h-[40px] w-full items-center px-[10px]">{models[index]?.model ?? 'empty'}</span>
-                    <button className="flex justify-center h-[40px] w-[40px] items-center" onClick={handleNextModel}>n</button>
+                <div className="flex bg-neutral-50">
+                    <button className="flex justify-center h-[30px] w-[30px] items-center" onClick={handlePrevModel}>p</button>
+                        <span className="flex justify-center h-[30px] w-full items-center px-[10px]">{models[index]?.model ?? 'empty'}</span>
+                    <button className="flex justify-center h-[30px] w-[30px] items-center" onClick={handleNextModel}>n</button>
                 </div>
                 {/*<Select.Root onValueChange={setValue} value={value}>
                     <Select.Trigger>
@@ -55,7 +61,6 @@ export default function ModelNode(){
                         {models && models.map((mdl, id) => (<Select.Item className="hover:bg-indigo-50 p-[10px] border-none outline-none text-[10px]" key={'model' + id} value={mdl.model}>{mdl.model}</Select.Item>))}
                     </Select.Content>
                 </Select.Root>*/}
-
             </div>
         </div>
     )
