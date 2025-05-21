@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ReactFlow, Background, BackgroundVariant, Controls, Node, Edge, useEdgesState, useNodesState } from "@xyflow/react";
+import { ReactFlow, Background, BackgroundVariant, Controls, Node, Edge, useEdgesState, useNodesState, getIncomers } from "@xyflow/react";
 import StartNode from "../customNodes/osspitaflow/StartNode";
 import OllamaNode from "../customNodes/osspitaflow/OllamaNode";
 import FileOutputNode from "../customNodes/osspitaflow/FileOutputNode";
@@ -30,13 +30,18 @@ export default function Spita(){
     ], []);
     
       const initEdges = useMemo(() => [
-        { id: '1-2', source: '1', target: '3' },
+        { id: '1-2', source: '1', target: '3', targetHandle: 'start' /*type : 'step'*/ },
         { id: '5-3', source: '5', target: '3', targetHandle: 'model' },
         { id: '2-3', source: '2', target: '3', targetHandle: 'prompt' },
+        { id: '3-4', source: '3', target: '4', targetHandle: 'input' },
     ], []);
     
     const [nodes, setNodes, onNodesChange] = useNodesState<Node>(initNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>(initEdges);
+
+    useEffect(() => {
+        console.log(JSON.stringify(getIncomers({ id: '3', type: 'ollamaNode', position: { x: 400, y: 0 }, data: { label: 'Ollama' } }, nodes, edges)))
+    }, [])
 
     /*useEffect(() => {
         const nds = nodes.map(nd =>  {
@@ -65,8 +70,8 @@ export default function Spita(){
                 onEdgesChange={onEdgesChange}
                 snapToGrid={true}
                 nodeTypes={nodeTypes}
-                defaultViewport={{ x: 0, y: 0, zoom: 1.5 }}
                 fitView
+                defaultViewport={{ x: 0, y: 0, zoom: 0.5 }}
                 attributionPosition="bottom-left"
                 style={{background:"#FFFFFF"}}
             >
