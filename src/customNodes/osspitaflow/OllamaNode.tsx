@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Handle, NodeProps, Position, Node, useNodeConnections } from "@xyflow/react";
 
-export default function OllamaNode({data} : NodeProps<Node<{prompt : string, context : string, model : string}>>){
+export default function OllamaNode({data} : NodeProps<Node<{label : string, prompt : string, context : string, model : string}>>){
     
     const connections = useNodeConnections({
         handleType: 'target',
@@ -9,7 +9,7 @@ export default function OllamaNode({data} : NodeProps<Node<{prompt : string, con
 
     return(
         <div className="node">
-            <div className="text-left">
+            <div className="text-left gap-x-[1rem] flex flex-row bg-amber-200">
                 <Handle
                     className="handle"
                     type="target"
@@ -42,7 +42,7 @@ export default function OllamaNode({data} : NodeProps<Node<{prompt : string, con
                 />
                 <label className="label">Prompt</label>
             </div>
-            <span className="w-full text-center">Ollama</span>
+            <span className="w-full text-center">{data.label ?? 'Start'}</span>
             <div>100%</div>
             <div className="text-left">
                 <Handle
