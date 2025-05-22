@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Handle, Position } from "@xyflow/react";
+import { Handle, NodeProps, Position, Node } from "@xyflow/react";
 import { OllamaService } from "../../services/OllamaService";
 import { useEffect, useState } from "react";
 import { IModelInfos } from "../../interfaces/responses/OllamaResponseTypes";
 // import * as Select from '@radix-ui/react-select'
 import './ModelNode.css'
 
-export default function ModelNode(){
+export default function ModelNode({data} : NodeProps<Node<{label : string}>>){
 
     const [models, setModels] = useState<IModelInfos[]>([])
     // const [activeModel, setActiveModel] = useState<string|null>(null)
@@ -45,7 +45,7 @@ export default function ModelNode(){
                 isConnectable={true}
             />
             <div style={{display:'flex', flexDirection:'column', rowGap:'1rem'}}>
-                <span>Model</span>
+                <span>{data.label ?? 'Model'}</span>
                 <div className="flex bg-neutral-50">
                     <button className="flex justify-center h-[30px] w-[30px] items-center" onClick={handlePrevModel}>p</button>
                         <span className="flex justify-center h-[30px] w-full items-center px-[10px]">{models[index]?.model ?? 'empty'}</span>

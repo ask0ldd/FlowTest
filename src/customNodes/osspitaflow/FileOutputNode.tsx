@@ -6,7 +6,7 @@ export default function FileOutputNode({id, data, isConnectable}: NodeProps<Node
     // should be changed to allow only one connection
 
     return(
-        <>
+        <div style={{padding : '1rem'}}>
             <Handle
                 type="target"
                 id="input"
@@ -23,6 +23,6 @@ export default function FileOutputNode({id, data, isConnectable}: NodeProps<Node
                 <span>Reset & Overwrite</span>
                 <span>Auto-Increment</span>
             </div>
-        </>
+        </div>
     )
 }
