@@ -1,15 +1,35 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Handle, NodeProps, Position, Node, useNodeConnections } from "@xyflow/react";
+import { Handle, NodeProps, Position, Node, useNodeConnections, useNodesData } from "@xyflow/react";
+import { useEffect } from "react";
+import { StartNodeType } from "./StartNode";
+import OllamaMockService from "../../services/OllamaMockService";
 
 export default function OllamaNode({data} : NodeProps<Node<{label : string, prompt : string, context : string, model : string}>>){
-    
-    const connections = useNodeConnections({
+
+    /*const startConnection = useNodeConnections({
         handleType: 'target',
     });
 
+    console.log(JSON.stringify(startConnection))
+
+    const startNode = startConnection[0]?.source
+    const startNodesData = useNodesData<StartNodeType>(startNode)
+
+    useEffect(() => {
+        console.log(startNodesData?.data.activate)
+    }, [startNodesData?.data.activate])*/
+
+    function process({ model, systemPrompt = 'You are a helpful assistant.', prompt } : {model : string, systemPrompt : string, prompt : string}){
+        OllamaMockService.generate({model, systemPrompt, prompt})
+    }
+
+    function handleStartClick(){
+
+    }
+
     return(
-        <div className="node">
-            <div className="text-left gap-x-[1rem] flex flex-row bg-amber-200">
+        <div className="node" onClick={handleStartClick}>
+            <div className="text-left">
                 <Handle
                     className="handle"
                     type="target"
@@ -18,7 +38,7 @@ export default function OllamaNode({data} : NodeProps<Node<{label : string, prom
                     onConnect={(params) => void 0}
                     isConnectable={true}
                 />
-                <label className="label">Sys Prompt</label>
+                <label className="label text-[14px]">Sys Prompt</label>
             </div>
             <div className="text-left">
                 <Handle
