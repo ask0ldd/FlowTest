@@ -1,11 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Handle, NodeProps, Position, Node } from "@xyflow/react";
+import { Handle, NodeProps, Position, Node, useReactFlow } from "@xyflow/react";
 
-export default function StartNode({data} : NodeProps<Node<{label : string, start : () => void}>>){
+export default function StartNode({id, data} : NodeProps<StartNodeType>){
+
+    const { updateNodeData } = useReactFlow();
+
+    function handleStartClick(){
+        updateNodeData(id, {activate : true})
+    }
 
     return(
         <>
-            <button className="w-[120px]" onClick={data.start}>{data.label ?? 'Start'}</button>
+            <button className="w-[120px]" onClick={handleStartClick}>{data.label ?? 'Start'}</button>
             <Handle
                 type="source"
                 position={Position.Right}
@@ -15,3 +21,5 @@ export default function StartNode({data} : NodeProps<Node<{label : string, start
         </>
     )
 }
+
+export type StartNodeType = Node<{ label: string, activate : boolean, start : () => void }, 'start'>;
