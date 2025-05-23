@@ -32,7 +32,7 @@ export default function ComputeLLM(){
     const onConnect = useCallback(
         (connection : Connection) =>
             setEdges(eds =>
-            addEdge<Edge>(connection, eds),
+                addEdge<Edge>(connection, eds),
             ),
         [setEdges],
     );

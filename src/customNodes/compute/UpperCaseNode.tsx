@@ -12,7 +12,7 @@ export default function UpperCaseNode({ id }: NodeProps){
 
     // This hook lets you subscribe to changes of a specific nodes data object
     // here : the source node
-    const n1TextNode = connections[0]?.source
+    const n1TextNode = connections[0]?.source // retrieve parent node
     const nodesData = useNodesData<TextNodeType | ResultNodeType | UpperCaseNodeType>(n1TextNode);
     const textNode = isTextNode(nodesData) ? nodesData : null;
     
