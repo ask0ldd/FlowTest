@@ -1,0 +1,44 @@
+.SelectTrigger {
+  background: red;
+}
+
+.SelectValue {
+  background: red;
+}
+
+.SelectItem {
+  font-size: 13px;
+  line-height: 1;
+  color: var(--violet-11);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  height: 25px;
+  padding: 0 35px 0 25px;
+  position: relative;
+  user-select: none;
+  background: #fff;
+}
+
+.SelectItem[data-disabled] {
+  color: var(--mauve-8);
+  pointer-events: none;
+}
+
+.SelectItem[data-highlighted] {
+  outline: 1px solid red;
+  background-color: var(--violet-9);
+  color: var(--violet-1);
+}
+
+.SelectLabel {
+  padding: 0 25px;
+  font-size: 12px;
+  line-height: 25px;
+  color: var(--mauve-11);
+  background: red;
+}
+
+button {
+  border-radius: 0;
+}
