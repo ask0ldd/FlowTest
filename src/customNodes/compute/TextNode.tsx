@@ -1,4 +1,4 @@
-import { type NodeProps, Handle, Position, type Node, useReactFlow } from "@xyflow/react";
+import { NodeProps, Handle, Position, Node, useReactFlow } from "@xyflow/react";
 
 export default function TextNode({ id, data }: NodeProps<Node<{ text: string }>>){
     const { updateNodeData, setNodes } = useReactFlow();

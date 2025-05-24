@@ -11,7 +11,7 @@ export class FlowService{
     static buildAdjacencyList(edges: Edge[]): Record<NodeId, NodeId[]> {
         const adjacencyList: Record<NodeId, NodeId[]> = {};
 
-        console.log('edges : ', JSON.stringify(edges))
+        // console.log('edges : ', JSON.stringify(edges))
 
         edges.forEach(({ source, target }) => {
             if (!adjacencyList[target]) {
@@ -20,7 +20,7 @@ export class FlowService{
             adjacencyList[target].push(source);
         });
         
-        console.log('adjency : ', JSON.stringify(adjacencyList))
+        // console.log('adjency : ', JSON.stringify(adjacencyList))
 
         return adjacencyList;
     }
